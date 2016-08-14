@@ -1,12 +1,11 @@
 import java.util.Random;
 
 public class TicTacToe extends Game{
-	String status;
 	private Player winner = null;
 	private Player p1;
 	private Player p2;
 	private TicTacToeBoard t1;
-	int noOfMoves = 0;
+	private int noOfMoves = 0;
 	
 	public TicTacToe(Player p1,Player p2,TicTacToeBoard t1){
 		this.p1 = p1;
@@ -14,6 +13,7 @@ public class TicTacToe extends Game{
 		this.t1 = t1;
 	}
 	
+	// This method is used to play a random move created in createRandomMove method
 	public void playAMove(Player player, String move){
 		
 		int row = move.charAt(0) - 'A';
@@ -37,6 +37,7 @@ public class TicTacToe extends Game{
 		}
 	}
 	
+	// This method is to print the Game Board 
 	private void printBoard(){
 		for(int i=0;i<3;i++){
 			System.out.println("");
@@ -45,6 +46,8 @@ public class TicTacToe extends Game{
 			}
 		}
 	}
+	
+	//This method checks if the player is a winner at any instance of time
 	public boolean checkWinner(Player player){
 		
 		//base condition for 
@@ -83,6 +86,7 @@ public class TicTacToe extends Game{
 		return false;
 	}
 	
+	//creates a random move for simulated play
 	private String createRandomMove(){
 		int min = 0;
 		int max = 2;
@@ -91,22 +95,22 @@ public class TicTacToe extends Game{
 		String row = String.valueOf(alphabet.charAt(new Random().nextInt(max - min + 1) + min));
 		return row+column;
 	}		
-		
+	
+	//method to start the game	
 	public void startGame(){
 		int count = 1;
+	    
 	    while(winner==null){
 	    	String move = createRandomMove();
-	    //	System.out.println(move);
-	    	if(count%2==1)
+	    	if(count%2==1) {
 	    		playAMove(p1,move);
+	    	}
 	    	
-	    	else
+	    	else {
 	    		playAMove(p2,move);
+	    	}
 	    	
 	    	count++;
-	    		
 	    }
 	}
-	
-	
 }
